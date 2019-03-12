@@ -1,97 +1,128 @@
 package Model;
 
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author Desmond
+*/
 
 public class CRM {//throws
     
     private String crmCompany;
-    //private ArrayList<Accounts> account;
-    //private ArrayList<Accounts> opportunity;
-    //private ArrayList<Leads> leads;
+    private ArrayList<Accounts> account;
+    private ArrayList<Accounts> opportunity;
+    private ArrayList<Lead> leads;
     
-    public void CRM(String name) {
+    public CRM(String name) {
         //initialize
         this.crmCompany = name;
-        //this.account = new ArrayList<>();
-        //this.leads = new ArrayList<>();
+        this.account = new ArrayList<>();
+        this.opportunity = new ArrayList<>();
+        this.leads = new ArrayList<>();
     }
     
+    //Setters and getters
     public String getName(){
-        return this.crmCompany;
+        return crmCompany;
     }
     
     public void setName(String name){
-        this.crmCompany = name;
+        crmCompany = name;
+    }
+ 
+    public void addAccount(Accounts account){
+        this.account.add(account);
+    }
+    public void addOpporunity(Accounts opportunity){
+        this.opportunity.add(opportunity);
     }
     
-    //add account
-    public void addAccount(){
-        
+    public void addLead(Lead lead){
+        this.leads.add(lead);
     }
-    //add opportunity
-    
-    public void addOpportunity(){
-        
-    }
-    //add lead
-    public void addLead(){
-        
-    }
-    
     
     //account index ( assume it's the corrrect index passed in) and account name
-    public void addContact(int accountPos, Contact contact){
-        
+    public void addContactAccount(int accountPos, Contacts contact){
+        account.get(accountPos).addContact(contact);
     }
     
-    public void updateContact(int accountPos, String cName, Contact contact){
-        
+    public void updateContactAccount(int accountPos, String cName, Contacts contact){
+        account.get(accountPos).updateContact(cName, contact);
     }
     
-    public void updateContactName(int accountPos, String oldName, String newName){ //
-        
+    public void updateContactNameAccount(int accountPos, String oldName, String newName){ //
+        account.get(accountPos).updateConName(oldName, newName);
     }
     
-    public void updateContactNum(int accountPos, String oldNum, String newNum){
-        
+    public void updateContactNumAccount(int accountPos, String oldNum, String newNum){
+        account.get(accountPos).updateConNum(oldNum, newNum);
     }
     
-    public void updateContactEmail(int accountPos, String oldEmail, String newEmail){
-        
+    public void updateContactEmailAccount(int accountPos, String oldEmail, String newEmail){
+        account.get(accountPos).updateConEM(oldEmail, newEmail);
     }
     
-    public void leadToOpportunity(){
-        //passing in lead
-           //create new account object and call constructor to create the lead
-           //pass in contact list or empty list blahbalhl
-               //delete lead from the list
-        //add account into the list
-        
-        //OR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            //pass through lead object and arraylist of contact list
+    public void updateContactOpportunity(int opportunityPos, String cName, Contacts contact){
+        opportunity.get(opportunityPos).updateContact(cName, contact);
+    }
+    
+    public void updateContactNameOpportunity(int opportunityPos, String oldName, String newName){
+        opportunity.get(opportunityPos).updateConName(oldName, newName);
+    }
+    
+    public void updateContactNumOpportunity(int opportunityPos, String oldNum, String newNum){
+        opportunity.get(opportunityPos).updateConNum(oldNum, newNum);
+    }
+    
+    public void updateContactEmailOpportunity(int opportunityPos, String oldEmail, String newEmail){
+        opportunity.get(opportunityPos).updateConEM(oldEmail, newEmail);
+    }
+    
+    public void leadToOpportunity(Lead lead, ArrayList<Contacts> contact){
+        opportunity.add(new Accounts(lead, contact));
+    }
+    
+    public void opportunityToAccount(Accounts opp){
+        opp.toAccount();
     }
     
     
     //print for each of the 3 lists
         //print out index too
-    public void printAccounts(){
-        
+    public void printAccount(){
+        for(int i = 1; i <= account.size(); i++){
+            System.out.print(i + ". ");
+            account.get(i).toString();
+        }
     }
     
-    public void printOpportunities(){
-        
+    public void printOpportunity(){
+        for(int i = 1; i <= opportunity.size(); i++){
+            System.out.print(i + ". ");opportunity.get(i).toString();
+        }
     }
     
     public void printLeads(){
+        for(int i = 1; i <= leads.size(); i++){
+            System.out.print(i + ". ");leads.get(i).getCompanyName();
+            //maybe Lead class needs a toString() function
+        }
+    }
+    
+    public String allInfo(){
+        String all = "";
+        for (int i = 1; i <= account.size(); i++){
+            all += i + ". " + account.get(i).allinfo() + "\n";
+        }
         
+        return all;
     }
              
     @Override
     public String toString(){        
-        //call all 3 prints
-        printAccounts();
-        printOpportunities();
-        printLeads();
-        
-        return this.crmCompany;
+        return account.toString();
+        //should this be the Account object toString() or the CRM toString() for CRM company name? (current class)
+        //return getName();
     }
 }
