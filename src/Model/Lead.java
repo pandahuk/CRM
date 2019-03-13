@@ -11,6 +11,10 @@ package Model;
  */
 public class Lead {
     private String Company_Name;
+    
+    //create constructor for lead
+    
+    
     //setters
     public void setCompanyName(String CN)
     {
@@ -22,4 +26,5 @@ public class Lead {
     {
         return Company_Name;
     }
+    // add a tostring method 
 }
