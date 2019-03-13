@@ -23,6 +23,18 @@ public class Accounts {
         this.Account = false;
     }
     
+    public Accounts(String n,ArrayList<Contacts> al){
+        this.accountName = n;
+        this.contractList = al;
+        this.Account = false;
+    }
+    
+    public Accounts(String n,ArrayList<Contacts> al, boolean a){
+        this.accountName = n;
+        this.contractList = al;
+        this.Account = a;
+    }
+    
     public Accounts(Lead l, ArrayList<Contacts> al){
         this.accountName = l.getCompanyName();
         this.contractList = al;
@@ -47,11 +59,7 @@ public class Accounts {
         this.Account = a;
     }
     
-    
-    
-    
-    
-    
+    //will return -1 if it is not found
     private int getindex(String s){
         for(int i= 0; i < contractList.size(); i++){
             if(contractList.get(i).getName().compareToIgnoreCase(s)== 0)
@@ -61,6 +69,7 @@ public class Accounts {
         return -1;
     }
     
+    //wil compare object not the name
     public void addContact(Contacts c){
         if (this.contractList.contains(c)){
             System.out.print("Duplicated Contact\n");
@@ -69,6 +78,7 @@ public class Accounts {
         this.contractList.add(c);
     }
     
+    //will compare object not name
     public void updateContact(String name, Contacts c){
         if (this.contractList.contains(c))
             System.out.print("Duplicated Contact\n");
@@ -81,6 +91,7 @@ public class Accounts {
             System.out.println("name not found \n");
     }
     
+    // -1 will be returned if item is not inside the list
     public void updateConName(String name, String newName){
         int r = getindex(name);
         if ( r == -1){
@@ -89,6 +100,7 @@ public class Accounts {
         else
             System.out.println("name not found \n"); 
     }
+    // -1 will be returned if item is not inside the list
     public void updateConNum(String name, String Pnum){
         int r = getindex(name);
         if ( r == -1){
@@ -98,6 +110,7 @@ public class Accounts {
             System.out.println("name not found \n"); 
     }
     
+    // -1 will be returned if item is not inside the list
     public void updateConEM(String name, String Email){
         int r = getindex(name);
         if ( r == -1){
@@ -111,6 +124,7 @@ public class Accounts {
         this.Account = true;
     }
     
+    //call contacts tostring no need to get each individual element
     public String allinfo(){
         String all = "Company Name: " + this.accountName + "\n Contacts: \n";
         for (int i = 0; i < this.contractList.size(); i++){
@@ -123,6 +137,6 @@ public class Accounts {
     
     @Override
     public String toString(){
-        return this.accountName;
+        return this.accountName + "\n";
     }
 }
