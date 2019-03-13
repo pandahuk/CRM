@@ -43,6 +43,8 @@ public class CRM {//throws
     }
     
     //account index ( assume it's the corrrect index passed in) and account name
+    // you will need to test to see if the account pos is in range before using it!!!
+    // sorry about this 
     public void addContactAccount(int accountPos, Contacts contact){
         account.get(accountPos).addContact(contact);
     }
@@ -79,10 +81,14 @@ public class CRM {//throws
         opportunity.get(opportunityPos).updateConEM(oldEmail, newEmail);
     }
     
+    // alter to accept a int for the pos of the lead. view does not have access to
+    // CRM class leads. check if its in range if not print error msg and return.
     public void leadToOpportunity(Lead lead, ArrayList<Contacts> contact){
         opportunity.add(new Accounts(lead, contact));
     }
     
+    // alter to accept a int for the pos of the opp. view does not have access to
+    // CRM class opps. check if its in range if not print error msg and return.
     public void opportunityToAccount(Accounts opp){
         opp.toAccount();
     }
@@ -90,25 +96,38 @@ public class CRM {//throws
     
     //print for each of the 3 lists
         //print out index too
+    
     public void printAccount(){
-        for(int i = 1; i <= account.size(); i++){
-            System.out.print(i + ". ");
-            account.get(i).toString();
+        for(int i = 0; i < account.size(); i++){
+            System.out.print(i + ". " + account.get(i));
+            
+            //account.get(i).toString(); no need to call too string.
+            //just out put the object itself
         }
     }
     
     public void printOpportunity(){
-        for(int i = 1; i <= opportunity.size(); i++){
-            System.out.print(i + ". ");opportunity.get(i).toString();
+        for(int i = 0; i < opportunity.size(); i++){
+            System.out.print(i + ". " + opportunity.get(i));
+            //opportunity.get(i).toString(); no need to call too string.
+            //just out put the object itself
         }
     }
     
     public void printLeads(){
-        for(int i = 1; i <= leads.size(); i++){
-            System.out.print(i + ". ");leads.get(i).getCompanyName();
-            //maybe Lead class needs a toString() function
+        for(int i = 0; i < leads.size(); i++){
+            System.out.print(i + ". " + leads.get(i).getCompanyName() + "\n");
+            //System.out.print(i + ". "+ leads.get(i));
+            //maybe Lead class needs a toString() function "yes it should"
         }
     }
+    
+    //if you alter the 3 prints to return strings instead of printing then you
+    //can just call them in allInfo and return the string that each of them 
+    //create together.
+    //i might also need you to add 2 more methods.... simillar to the 2 above
+    //just instead of using tostring call the all info so i can view the 
+    //contact info in view.
     
     public String allInfo(){
         String all = "";
@@ -118,7 +137,11 @@ public class CRM {//throws
         
         return all;
     }
-             
+    
+    //loop though the 3 list and create a string that you can return. 
+    //str += i + ". " + account.get(i); example.
+    // this toString will print out the basic info
+    // for all the acocunts/opps/tostrings
     @Override
     public String toString(){        
         return account.toString();
