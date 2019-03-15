@@ -1,0 +1,4 @@
+Edgar:prompt user for category search(year,name,etc)
+Hung: create variables for category(year created,etc) 
+Desmond: search function
+Devon: android app
