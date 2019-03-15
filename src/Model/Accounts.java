@@ -68,7 +68,7 @@ public class Accounts {
         return -1;
     }
     
-    //wil compare object not the name
+    //wil compare object not the name, switch to compare contact by name
     public void addContact(Contacts c){
         for (int i = 0; i < contractList.size(); i++)
         {
@@ -80,10 +80,8 @@ public class Accounts {
         this.contractList.add(c);
     }
     
-    //will compare object not name
+    //will compare object not name, switch to compare contact by name
     public void updateContact(String name, Contacts c){
-        if (this.contractList.contains(c))
-            System.out.print("Duplicated Contact\n");
         int r = getindex(name);
         if ( r != -1){
             this.contractList.remove(r);
@@ -130,7 +128,7 @@ public class Accounts {
     public String allinfo(){
         String all = "Company Name: " + this.accountName + "\n Contacts: \n";
         for (int i = 0; i < this.contractList.size(); i++){
-            all += this.contractList.get(i).toString();
+            all += this.contractList.get(i) + "\n";
         }
         return all;
     }
