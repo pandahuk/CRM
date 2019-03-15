@@ -13,7 +13,10 @@ public class Lead {
     private String Company_Name;
     
     //create constructor for lead
-    
+    public Lead(String name)
+    {
+        Company_Name = name;
+    }
     
     //setters
     public void setCompanyName(String CN)
@@ -27,4 +30,9 @@ public class Lead {
         return Company_Name;
     }
     // add a tostring method 
+    @Override
+    public String toString
+    {
+        return "Lead Name: " + Company_name + "\n";
+    }
 }
