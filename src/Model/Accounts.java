@@ -64,16 +64,18 @@ public class Accounts {
         for(int i= 0; i < contractList.size(); i++){
             if(contractList.get(i).getName().compareToIgnoreCase(s)== 0)
                 return i;
-            
         }
         return -1;
     }
     
     //wil compare object not the name
     public void addContact(Contacts c){
-        if (this.contractList.contains(c)){
-            System.out.print("Duplicated Contact\n");
-            return;
+        for (int i = 0; i < contractList.size(); i++)
+        {
+            if (this.contractList.get(i).getName() == c.getName()){
+                System.out.print("Duplicated Contact\n");
+                return;
+            }
         }
         this.contractList.add(c);
     }
@@ -128,9 +130,7 @@ public class Accounts {
     public String allinfo(){
         String all = "Company Name: " + this.accountName + "\n Contacts: \n";
         for (int i = 0; i < this.contractList.size(); i++){
-            all += this.contractList.get(i).getName() + "\n "
-                    + "Phone number: \n" + this.contractList.get(i).getPhoneNumber() 
-                    + "\n E-mail: \n" + this.contractList.get(i).getEmail() + "\n";
+            all += this.contractList.get(i).toString();
         }
         return all;
     }
