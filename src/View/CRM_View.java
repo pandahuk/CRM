@@ -9,7 +9,8 @@ public class CRM_View {
     private static CRM userCRM;
     private static final Scanner scan = new Scanner(System.in);
     
-    
+    //testing new clone
+    private static int x;
     public static void main(String[] args) {
         userCompanyName = CRMname();
         userCRM = new CRM(userCompanyName);
