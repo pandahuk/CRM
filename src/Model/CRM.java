@@ -46,63 +46,70 @@ public class CRM {//throws
     // you will need to test to see if the account pos is in range before using it!!!
     // sorry about this
     public void addContactAccount(int accountPos, Contacts contact){
-        if(accountPos > 0 && accountPos < account.size())
+        if(accountPos < account.size())
             account.get(accountPos).addContact(contact);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactAccount(int accountPos, String cName, Contacts contact){
-        if(accountPos > 0 && accountPos < account.size())
+        if(accountPos < account.size())
             account.get(accountPos).updateContact(cName, contact);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactNameAccount(int accountPos, String oldName, String newName){ //
-        if(accountPos > 0 && accountPos < account.size())
+        if(accountPos < account.size())
             account.get(accountPos).updateConName(oldName, newName);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactNumAccount(int accountPos, String oldNum, String newNum){
-        if(accountPos > 0 && accountPos < account.size())
+        if(accountPos < account.size())
             account.get(accountPos).updateConNum(oldNum, newNum);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactEmailAccount(int accountPos, String oldEmail, String newEmail){
-        if(accountPos > 0 && accountPos < account.size())
+        if(accountPos < account.size())
             account.get(accountPos).updateConEM(oldEmail, newEmail);
         else
             System.out.println("Index out of range");
     }
     
+    public void addContactOpportunity(int opportunityPos, Contacts contact){
+        if(opportunityPos < opportunity.size())
+            opportunity.get(opportunityPos).addContact(contact);
+        else
+            System.out.println("Index out of range");
+    }
+    
     public void updateContactOpportunity(int opportunityPos, String cName, Contacts contact){
-        if(opportunityPos > 0 && opportunityPos < opportunity.size())
+        if(opportunityPos < opportunity.size())
             opportunity.get(opportunityPos).updateContact(cName, contact);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactNameOpportunity(int opportunityPos, String oldName, String newName){
-        if(opportunityPos > 0 && opportunityPos < opportunity.size())
+        if(opportunityPos < opportunity.size())
             opportunity.get(opportunityPos).updateConName(oldName, newName);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactNumOpportunity(int opportunityPos, String oldNum, String newNum){
-        if(opportunityPos > 0 && opportunityPos < opportunity.size())
+        if(opportunityPos < opportunity.size())
             opportunity.get(opportunityPos).updateConNum(oldNum, newNum);
         else
             System.out.println("Index out of range");
     }
     
     public void updateContactEmailOpportunity(int opportunityPos, String oldEmail, String newEmail){
-        if(opportunityPos > 0 && opportunityPos < opportunity.size())
+        if(opportunityPos < opportunity.size())
             opportunity.get(opportunityPos).updateConEM(oldEmail, newEmail);
         else
             System.out.println("Index out of range");
@@ -110,18 +117,21 @@ public class CRM {//throws
     
     // alter to accept a int for the pos of the lead. view does not have access to
     // CRM class leads. check if its in range if not print error msg and return.
-    public void leadToOpportunity(int leadPos, Lead lead, ArrayList<Contacts> contact){
-        if(leadPos > 0 && leadPos < leads.size()){
-            opportunity.add(new Accounts(lead, contact));
+    public void leadToOpportunity(int leadPos, ArrayList<Contacts> contact){
+        if(leadPos < leads.size()){
+            opportunity.add(new Accounts(leads.get(leadPos), contact));
+            leads.remove(leadPos);
         }else
             System.out.println("Index out of range.");
     }
     
     // alter to accept a int for the pos of the opp. view does not have access to
     // CRM class opps. check if its in range if not print error msg and return.
-    public void opportunityToAccount(int opportunityPos, Accounts opp){
-        if(opportunityPos > 0 && opportunityPos < opportunity.size()){
-            opp.toAccount();
+    public void opportunityToAccount(int opportunityPos){
+        if(opportunityPos < opportunity.size()){
+            opportunity.get(opportunityPos).toAccount();
+            account.add( opportunity.get(opportunityPos));
+            opportunity.remove(opportunityPos);
         }else
             System.out.println("Index out of range.");
     }
@@ -131,7 +141,7 @@ public class CRM {//throws
         //print out index too
     
     public String printAccount(){
-        String accountStr = "";
+        String accountStr = "Accounts:\n";
         for(int i = 0; i < account.size(); i++){
             
             accountStr += (i + ". " + account.get(i));
@@ -143,7 +153,7 @@ public class CRM {//throws
     }
     
     public String printOpportunity(){
-        String opportunityStr = "";
+        String opportunityStr = "Opportunities: \n";
         for(int i = 0; i < opportunity.size(); i++){
             opportunityStr += (i + ". " + opportunity.get(i));
             //opportunity.get(i).toString(); no need to call too string.
@@ -153,7 +163,7 @@ public class CRM {//throws
     }
     
     public String printLeads(){
-        String leadStr = "";
+        String leadStr = "Leads: \n";
         for(int i = 0; i < leads.size(); i++){
             leadStr += (i + ". " + leads.get(i).getCompanyName() + "\n");
             //System.out.print(i + ". "+ leads.get(i));
@@ -172,7 +182,7 @@ public class CRM {//throws
     
     //I believe these are the two methods needed, let me know if it isn't.
     public String printAccountContacts(){
-        String contactStr = "";
+        String contactStr = "Accounts: \n";
         for(int i = 0; i < account.size(); i++){
             contactStr += (i + ". " + account.get(i).allinfo() + "\n");
             //System.out.print(i + ". "+ leads.get(i));
@@ -181,7 +191,7 @@ public class CRM {//throws
         return contactStr;
     }
     public String printOpportunityContacts(){
-        String opportunityStr = "";
+        String opportunityStr = "Opportunities: \n";
         for(int i = 0; i < opportunity.size(); i++){
             opportunityStr += (i + ". " + opportunity.get(i).allinfo() + "\n");
             //System.out.print(i + ". "+ leads.get(i));
@@ -191,7 +201,7 @@ public class CRM {//throws
     }
 
     public String allInfo(){
-        return (printAccount() + printOpportunity() + printLeads());
+        return (printAccountContacts() + printOpportunityContacts() + printLeads());
     }
     
     //loop though the 3 list and create a string that you can return. 
@@ -200,7 +210,7 @@ public class CRM {//throws
     // for all the acocunts/opps/tostrings
     @Override
     public String toString(){        
-        return getName();
+        return (printAccount() + printOpportunity() + printLeads());
         //should this be the Account object toString() or the CRM toString() for CRM company name? (current class)
              //This should be the CRM company name ( current class) since accounts should have their own company name for each individual objects in their List.
         
