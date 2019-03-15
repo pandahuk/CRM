@@ -31,8 +31,8 @@ public class Lead {
     }
     // add a tostring method 
     @Override
-    public String toString
+    public String toString()
     {
-        return "Lead Name: " + Company_name + "\n";
+        return "Lead Name: " + Company_Name + "\n";
     }
 }
