@@ -69,16 +69,18 @@ public class Accounts {
         return -1;
     }
     
-    //wil compare object not the name
+    //wil compare object not the name, switch to compare contact by name
     public void addContact(Contacts c){
-        if (this.contractList.contains(c)){
-            System.out.print("Duplicated Contact\n");
-            return;
+        for(Contacts curContact: contractList){
+            if(curContact.getName().equalsIgnoreCase(c.getName())){
+                System.out.print("Duplicated Contact\n");
+                return;
+            }
         }
         this.contractList.add(c);
     }
     
-    //will compare object not name
+    //will compare object not name, switch to compare contact by name
     public void updateContact(String name, Contacts c){
         if (this.contractList.contains(c))
             System.out.print("Duplicated Contact\n");
