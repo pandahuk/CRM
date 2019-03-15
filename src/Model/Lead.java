@@ -33,6 +33,6 @@ public class Lead {
     @Override
     public String toString
     {
-        return "Lead Name: " + Company_name;
+        return "Lead Name: " + Company_name + "\n";
     }
 }
