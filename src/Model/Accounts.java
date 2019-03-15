@@ -83,7 +83,7 @@ public class Accounts {
         if (this.contractList.contains(c))
             System.out.print("Duplicated Contact\n");
         int r = getindex(name);
-        if ( r == -1){
+        if ( r != -1){
             this.contractList.remove(r);
             this.contractList.add(c);
         }
@@ -94,7 +94,7 @@ public class Accounts {
     // -1 will be returned if item is not inside the list
     public void updateConName(String name, String newName){
         int r = getindex(name);
-        if ( r == -1){
+        if ( r != -1){
             this.contractList.get(r).setName(newName);
         }
         else
@@ -103,7 +103,7 @@ public class Accounts {
     // -1 will be returned if item is not inside the list
     public void updateConNum(String name, String Pnum){
         int r = getindex(name);
-        if ( r == -1){
+        if ( r != -1){
             this.contractList.get(r).setPhoneNumber(Pnum);
         }
         else
@@ -113,7 +113,7 @@ public class Accounts {
     // -1 will be returned if item is not inside the list
     public void updateConEM(String name, String Email){
         int r = getindex(name);
-        if ( r == -1){
+        if ( r != -1){
             this.contractList.get(r).setEmail(Email);
         }
         else
