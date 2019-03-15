@@ -303,12 +303,7 @@ public class CRM_View {
         do{
             name = scan.nextLine();
         }while(name.trim().equals(""));
-        
-        Lead nLead = new Lead();
-        nLead.setCompanyName(name);
-        return nLead;
-        //once constructor is made wil be ok
-        //return new Lead(name); 
+        return new Lead(name); 
     }
     
     private static Accounts createOpp(){
