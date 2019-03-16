@@ -18,7 +18,7 @@ public class test_lead {
     Lead l;
     @Before
     public void setUp() {
-        l = new Lead();
+        l = new Lead("new comp");
     }
     @Test
     public void test()

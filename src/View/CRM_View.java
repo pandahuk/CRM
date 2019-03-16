@@ -168,11 +168,11 @@ public class CRM_View {
         print("GoodBye\n");
     }
     
-    private static void print(String outPut){
+    public static void print(String outPut){
         System.out.print(outPut);
     }
         
-    private static int getPos(){
+    public static int getPos(){
         int pos;
         print("select an account/oppurtunity: ");
         do{
@@ -181,7 +181,7 @@ public class CRM_View {
         return pos;
     }
     
-    private static String CRMname(){
+    public static String CRMname(){
         String name;
         print("Enter your Buissness name for the CRM you wish to create: ");
         do{
@@ -191,7 +191,7 @@ public class CRM_View {
         return name;
     }
     
-    private static int simpleMenu(){
+    public static int simpleMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
                 "1.Create a lead\n"+
@@ -208,7 +208,7 @@ public class CRM_View {
         }while(decision < 1 || decision > 9);
         return decision;
     }
-    private static boolean leadMenu(){
+    public static boolean leadMenu(){
         String input;
         print("\nWould you like to change a lead to an opportunity? Y/N\n");
         do{
@@ -217,7 +217,7 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n")));
         return input.equalsIgnoreCase("y");
     }
-    private static int oppMenu(){
+    public static int oppMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
                 "1.Turn opportunity to account\n"+
@@ -233,7 +233,7 @@ public class CRM_View {
         return decision;
     }
     
-    private static int accountMenu(){
+    public static int accountMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
                 "1.Update a contact\n"+
@@ -249,7 +249,7 @@ public class CRM_View {
     }
     
     
-    private static boolean contactQ(){
+    public static boolean contactQ(){
         String input;
         print("\nwould you like to add contacts? Y/N\n");
         do{
@@ -258,7 +258,7 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n"));
         return input.equalsIgnoreCase("y");
     }
-    private static boolean MoreContactQ(){
+    public static boolean MoreContactQ(){
         String input;
         print("\nwould you like to add more contacts? Y/N\n");
         do{
@@ -267,7 +267,7 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n"));
         return input.equalsIgnoreCase("y");
     }
-    private static  Contacts createContact(){
+    public static  Contacts createContact(){
         String name;
         String phoneNum;
         String email;
@@ -282,7 +282,7 @@ public class CRM_View {
         
         return new Contacts(name,phoneNum,email);
     }
-    private static  ArrayList<Contacts> createContactList(){
+    public static  ArrayList<Contacts> createContactList(){
         ArrayList<Contacts> ContactsList = new ArrayList<>();
         Contacts contact;
         if(contactQ()){
@@ -297,7 +297,7 @@ public class CRM_View {
     
     
     
-    private static Lead createLead(){
+    public static Lead createLead(){
         String name;
         print("\nEnter the name of the new Lead: ");
         do{
@@ -306,7 +306,7 @@ public class CRM_View {
         return new Lead(name); 
     }
     
-    private static Accounts createOpp(){
+    public static Accounts createOpp(){
         String name;
         print("\nEnter the name of the new Opportunity : ");
         do{
@@ -316,7 +316,7 @@ public class CRM_View {
         return new Accounts(name, createContactList());
     }
     
-    private static Accounts createAccount(){
+    public static Accounts createAccount(){
         String name;
         print("\nEnter the name of the new Account: ");
         do{
