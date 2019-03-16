@@ -1,0 +1,33 @@
+User story
+Invoicing (history)
+
+
+description of function they want (non technical)
+I want my 2019 invoice history.
+
+what user 'hat' (market, dev, program, sale)
+Marketing user
+
+what they want to do what why(functional standpoint)
+They want to know how much they owe the company for the year as an invoice. (maybe sent to a certain location)
+
+what steps they take to do the work they want to do
+contact support, provide a name, email, number, or account number, password, request.
+
+
+
+User story
+list of contacts (by category)
+
+description of function they want (non technical)
+I want a list of clients from (   category    )
+	2019, age 40 above, balance of xxx
+
+what user 'hat' (market, dev, program, sale)
+Marketing user
+
+what they want to do what why(functional standpoint)
+Get a list of clients
+
+what steps they take to do the work they want to do
+request a list of clients from blahblah
