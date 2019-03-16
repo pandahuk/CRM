@@ -30,6 +30,16 @@ public class CRM {//throws
     public void setName(String name){
         crmCompany = name;
     }
+    
+    public ArrayList<Accounts> getAccount(){
+        return account;
+    }
+    public ArrayList<Accounts> getOpportunity(){
+        return opportunity;
+    }
+    public ArrayList<Lead> getLead(){
+        return leads;
+    }
  
     public void addAccount(Accounts account){
         this.account.add(account);
