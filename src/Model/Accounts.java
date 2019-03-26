@@ -59,6 +59,11 @@ public class Accounts {
         this.Account = a;
     }
     
+    //getter
+    public ArrayList<Contacts> getContacts(){
+        return contractList;
+    }
+    
     //will return -1 if it is not found
     private int getindex(String s){
         for(int i= 0; i < contractList.size(); i++){
