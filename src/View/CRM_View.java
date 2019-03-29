@@ -189,6 +189,7 @@ public class CRM_View {
                 //userCRM.printCatigories();
                 print("select a Catigory");
                 pos = getPos();
+                //if 0 medical if not then financ
                 //print(userCRM.PrintInfoCatigory(pos));
                 
                 break;
