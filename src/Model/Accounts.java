@@ -15,6 +15,8 @@ public class Accounts {
     private String accountName;
     private ArrayList<Contacts> contractList; // list of contracts
     private boolean Account; // true == account; false == oppotunity
+    private String Type;
+    private ArrayList<String> Form;
     
     // contrutors
     public Accounts(String n){
@@ -62,6 +64,22 @@ public class Accounts {
     //getter
     public ArrayList<Contacts> getContacts(){
         return contractList;
+    }
+    
+    public ArrayList<String> getForm(){
+        return Form;
+    }
+    
+    public String getType(){
+        return Type;
+    }
+    
+    //setter
+    public void setType(String t){
+        Type =t;
+    }
+    public void setForm(ArrayList<String> a){
+        Form = a;
     }
     
     //will return -1 if it is not found
