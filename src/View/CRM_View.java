@@ -15,7 +15,10 @@ public class CRM_View {
         userCompanyName = CRMname();
         userCRM = new CRM(userCompanyName);
         int choice, pos = 0, secondChoice;
-        String name,temp;
+        String name,temp,input;
+        ArrayList <String> questions;
+        Boolean promote;
+        
         do {
             choice = simpleMenu();
             switch(choice) {
@@ -37,6 +40,7 @@ public class CRM_View {
                         pos = scan.nextInt();
                     }while(pos < 0);
                     userCRM.leadToOpportunity(pos, createContactList());
+                    //userCRM.leadToOpportunity(pos, createContactList(), createForm());
                 }
 		break;
                 
@@ -47,7 +51,24 @@ public class CRM_View {
                 switch(secondChoice){
                     case 1:
                         pos = getPos();
-                        userCRM.opportunityToAccount(pos);
+                        promote = true;
+                        //questions =  userCRM.getOppFourm(pos)
+                        if(!questions.isEmpty()){
+                            print("Answer Y/N if you completed the following task\n");
+                            for(String i : questions){
+                               print(i);
+                                do{
+                                    input = scan.nextLine();
+                                }while(input.trim().equals(""));
+                                if(input.toLowerCase().compareTo("n") == 0)
+                                    print("can not make oppurtunity to account");
+                                    promote = false;
+                                    break;
+                            }
+                        }
+                        if(promote){ 
+                            userCRM.opportunityToAccount(pos);
+                        }
                         break;
                     case 2:
                         pos = getPos();
@@ -163,9 +184,14 @@ public class CRM_View {
             case 8:
 		print(userCRM.allInfo());
 		break;
+            case 9:
+                //userCRM.printCatigories();
+                print("select a Catigory");
+                pos = getPos();
+                //userCRM.PrintInfoCatigory(pos);
+                break;
             }
-	}while(choice != 9 );
-        
+	}while(choice != 10 );
         print("GoodBye\n");
     }
     
@@ -180,6 +206,24 @@ public class CRM_View {
             pos = scan.nextInt();
         }while(pos < 0);
         return pos;
+    }
+    
+    public static ArrayList<String> createFourm(){
+        ArrayList<String> questions = new ArrayList<>();
+        print("enter requirements to make this oppurtunity to become an account, one at a time.\n"
+                + "enter Q or quit to stop");
+        int i = 1;
+        String input;
+        do{
+            print("Enter Requirement " + i );
+            do{
+                input = scan.nextLine();
+            }while(input.trim().equals(""));
+            if(input.compareToIgnoreCase("q") == 0 || input.compareToIgnoreCase("quit") == 0)
+                break;
+        }while(true);
+        
+        return questions;
     }
     
     public static String CRMname(){
@@ -203,10 +247,11 @@ public class CRM_View {
                 "6.View all accounts\n"+
                 "7.View minimal CRM info\n"+
                 "8.View all CRM info\n"+
-                "9.quit\n");
+                "9.View by Catigory"+
+                "10.quit\n");
         do{
             decision = scan.nextInt();
-        }while(decision < 1 || decision > 9);
+        }while(decision < 1 || decision > 10);
         return decision;
     }
     public static boolean leadMenu(){

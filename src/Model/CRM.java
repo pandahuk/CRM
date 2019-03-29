@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -14,12 +15,41 @@ public class CRM {//throws
     private ArrayList<Accounts> opportunity;
     private ArrayList<Lead> leads;
     
+    //Two more lists for categories of each account and opporunity
+    /*private ArrayList<Accounts> financeAccount;
+    private ArrayList<Accounts> medicalAccount;
+    private ArrayList<Accounts> financeOpportunity;
+    private ArrayList<Accounts> medicalOpportunity;*/
+    
+    
+    //Categories and general category lists
+    private List<String> categories;
+    private ArrayList<Accounts> financeList;
+    private ArrayList<Accounts> medicalList;
+   
+            
+    //hard coded type for medical/financial
+    
+    
     public CRM(String name) {
         //initialize
         this.crmCompany = name;
         this.account = new ArrayList<>();
         this.opportunity = new ArrayList<>();
         this.leads = new ArrayList<>();
+        
+        //create financial and medical lists
+        /*financeAccount = new ArrayList<>();
+        medicalAccount = new ArrayList<>();
+        financeOpportunity = new ArrayList<>();
+        medicalOpportunity = new ArrayList<>();*/
+        
+         //Create categories and category lists, should be able to accept both opp and acc
+        categories.add("Medical");
+        categories.add("Finance");
+        
+        financeList = new ArrayList<>();
+        medicalList = new ArrayList<>();
     }
     
     //Setters and getters
@@ -40,6 +70,18 @@ public class CRM {//throws
     public ArrayList<Lead> getLead(){
         return leads;
     }
+    
+    public ArrayList<Accounts> getFinance(){
+        return financeList;
+    }
+    
+    public ArrayList<Accounts> getMedical(){
+        return medicalList;
+    }
+    
+    public List<String> getCategories(){
+        return categories;
+    }
  
     public void addAccount(Accounts account){
         this.account.add(account);
@@ -50,6 +92,24 @@ public class CRM {//throws
     
     public void addLead(Lead lead){
         this.leads.add(lead);
+    }
+    
+    //currently manual addition to lists.
+    public void addToFinance(Accounts acc){
+        financeList.add(acc);
+    }
+    
+    public void addToMedical(Accounts acc){
+        medicalList.add(acc);
+    }
+    
+    //currently manual removal from list
+    public void removeFinance(int pos){
+        financeList.remove(pos);
+    }
+    
+    public void removeMedical(int pos){
+        medicalList.remove(pos);
     }
     
     //account index ( assume it's the corrrect index passed in) and account name
@@ -141,6 +201,14 @@ public class CRM {//throws
         if(opportunityPos < opportunity.size()){
             opportunity.get(opportunityPos).toAccount();
             account.add( opportunity.get(opportunityPos));
+            
+            /*
+            get from main.positiongiven > find which sublist has the account, 
+            then move to corresponding list in account, then delete
+            
+            WILL MODIFY THIS later, for now we will use addFinance/Medical
+            */
+            
             opportunity.remove(opportunityPos);
         }else
             System.out.println("Index out of range.");
@@ -180,6 +248,30 @@ public class CRM {//throws
             //maybe Lead class needs a toString() function "yes it should"
         }
         return leadStr;
+    }
+    
+    public String printCategories(){
+        String categoryStr = "Categories: \n";
+        for(int i = 0 ; i < categories.size() ; i++){
+            categoryStr += (i + ". " + categories.get(i));
+        }
+        return categoryStr;
+    }
+    
+    public String printFinance(){
+        String financeStr = "Finance: \n";
+        for(int i = 0 ; i < financeList.size() ; i++){
+            financeStr += ( i + ". " + financeList.get(i).toString());
+        }
+        return financeStr;
+    }
+    
+    public String printMedical(){
+        String medicalStr = "Medical: \n";
+        for(int i = 0 ; i < medicalList.size() ; i++){
+            medicalStr += ( i + ". " + medicalList.get(i).toString());
+        }
+        return medicalStr;
     }
     
     //if you alter the 3 prints to return strings instead of printing then you
