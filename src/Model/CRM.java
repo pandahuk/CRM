@@ -15,15 +15,10 @@ public class CRM {//throws
     private ArrayList<Accounts> opportunity;
     private ArrayList<Lead> leads;
     
-    //Two more lists for categories of each account and opporunity
-    /*private ArrayList<Accounts> financeAccount;
-    private ArrayList<Accounts> medicalAccount;
-    private ArrayList<Accounts> financeOpportunity;
-    private ArrayList<Accounts> medicalOpportunity;*/
-    
-    
+
     //Categories and general category lists
     private List<String> categories;
+    private ArrayList<ArrayList<Accounts>> generalCategory;
     private ArrayList<Accounts> financeList;
     private ArrayList<Accounts> medicalList;
    
@@ -38,11 +33,7 @@ public class CRM {//throws
         this.opportunity = new ArrayList<>();
         this.leads = new ArrayList<>();
         
-        //create financial and medical lists
-        /*financeAccount = new ArrayList<>();
-        medicalAccount = new ArrayList<>();
-        financeOpportunity = new ArrayList<>();
-        medicalOpportunity = new ArrayList<>();*/
+        generalCategory = new ArrayList<ArrayList<Accounts>>();
         
          //Create categories and category lists, should be able to accept both opp and acc
         categories.add("Medical");
@@ -85,9 +76,17 @@ public class CRM {//throws
  
     public void addAccount(Accounts account){
         this.account.add(account);
+        if(account.getType().equals("Finance")){
+            addToFinance(account);
+        }else
+            addToMedical(account);
     }
     public void addOpporunity(Accounts opportunity){
         this.opportunity.add(opportunity);
+        if(opportunity.getType().equals("Finance")){
+            addToFinance(opportunity);
+        }else
+            addToMedical(opportunity);
     }
     
     public void addLead(Lead lead){
@@ -187,12 +186,17 @@ public class CRM {//throws
     
     // alter to accept a int for the pos of the lead. view does not have access to
     // CRM class leads. check if its in range if not print error msg and return.
-    public void leadToOpportunity(int leadPos, ArrayList<Contacts> contact){
+    public void leadToOpportunity(int leadPos, ArrayList<Contacts> contact , ArrayList<String> form, String type){
         if(leadPos < leads.size()){
-            opportunity.add(new Accounts(leads.get(leadPos), contact));
+            opportunity.add(new Accounts(leads.get(leadPos), contact, form, type));
             leads.remove(leadPos);
         }else
             System.out.println("Index out of range.");
+    }
+    
+    public ArrayList<String> getOppForm(int pos){
+        //position for opportunity, access and use getForm from accounts,return form list 
+        return opportunity.get(pos).getForm();
     }
     
     // alter to accept a int for the pos of the opp. view does not have access to
@@ -257,6 +261,14 @@ public class CRM {//throws
         }
         return categoryStr;
     }
+    
+    public String printGeneralCategory(){
+        String genStr = "";
+        
+        
+        return genStr;
+    }
+    
     
     public String printFinance(){
         String financeStr = "Finance: \n";
