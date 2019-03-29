@@ -94,6 +94,7 @@ public class CRM {//throws
         this.leads.add(lead);
     }
     
+    //currently manual addition to lists.
     public void addToFinance(Accounts acc){
         financeList.add(acc);
     }
@@ -102,6 +103,14 @@ public class CRM {//throws
         medicalList.add(acc);
     }
     
+    //currently manual removal from list
+    public void removeFinance(int pos){
+        financeList.remove(pos);
+    }
+    
+    public void removeMedical(int pos){
+        medicalList.remove(pos);
+    }
     
     //account index ( assume it's the corrrect index passed in) and account name
     // you will need to test to see if the account pos is in range before using it!!!
