@@ -43,6 +43,14 @@ public class Accounts {
         this.Account = false;
     }
     
+    public Accounts(Lead l, ArrayList<Contacts> al, ArrayList<String> form, String type){
+        this.Form = form;
+        this.Type = type;
+        this.accountName = l.getCompanyName();
+        this.contractList = al;
+        this.Account = false;
+    }
+    
     public Accounts(Lead l){
         this.accountName = l.getCompanyName();
         this.contractList = null;

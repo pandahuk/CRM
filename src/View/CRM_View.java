@@ -40,6 +40,7 @@ public class CRM_View {
                         pos = scan.nextInt();
                     }while(pos < 0);
                     userCRM.leadToOpportunity(pos, createContactList());
+                    // also pass in type of catigory
                     //userCRM.leadToOpportunity(pos, createContactList(), createForm());
                 }
 		break;
@@ -188,7 +189,9 @@ public class CRM_View {
                 //userCRM.printCatigories();
                 print("select a Catigory");
                 pos = getPos();
-                //userCRM.PrintInfoCatigory(pos);
+                //if 0 medical if not then financ
+                //print(userCRM.PrintInfoCatigory(pos));
+                
                 break;
             }
 	}while(choice != 10 );
