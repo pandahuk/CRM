@@ -7,6 +7,11 @@ import java.util.ArrayList;
  * @author Desmond
 */
 
+// might need some sort of private list to contain the diffrent category options, we
+// can later add a way to add more categories, but for now just hard code the 2 
+// categories  we mentioned.
+//
+// 
 public class CRM {//throws
     
     private String crmCompany;
