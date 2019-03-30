@@ -10,14 +10,16 @@ public class CRM_View {
     private static final Scanner scan = new Scanner(System.in);
     
     //testing new clone
-    private static int x;
     public static void main(String[] args) {
+        print("hello");
         userCompanyName = CRMname();
+        print("hello");
         userCRM = new CRM(userCompanyName);
         int choice, pos = 0, secondChoice;
         String name,temp,input;
         ArrayList <String> questions;
         Boolean promote;
+        
         
         do {
             choice = simpleMenu();
@@ -39,9 +41,7 @@ public class CRM_View {
                     do{
                         pos = scan.nextInt();
                     }while(pos < 0);
-                    userCRM.leadToOpportunity(pos, createContactList());
-                    // also pass in type of catigory
-                    //userCRM.leadToOpportunity(pos, createContactList(), createForm());
+                    userCRM.leadToOpportunity(pos, createContactList(), createFourm(), createType());
                 }
 		break;
                 
@@ -53,7 +53,7 @@ public class CRM_View {
                     case 1:
                         pos = getPos();
                         promote = true;
-                        //questions =  userCRM.getOppFourm(pos)
+                        questions =  userCRM.getOppForm(pos);
                         if(!questions.isEmpty()){
                             print("Answer Y/N if you completed the following task\n");
                             for(String i : questions){
@@ -186,12 +186,14 @@ public class CRM_View {
 		print(userCRM.allInfo());
 		break;
             case 9:
-                //userCRM.printCatigories();
+                
+                print(userCRM.printCategories());
                 print("select a Catigory");
                 pos = getPos();
-                //if 0 medical if not then financ
-                //print(userCRM.PrintInfoCatigory(pos));
-                
+                if(pos == 0)
+                    print(userCRM.printMedical());
+                else
+                    print(userCRM.printFinance());   
                 break;
             }
 	}while(choice != 10 );
@@ -331,6 +333,7 @@ public class CRM_View {
         
         return new Contacts(name,phoneNum,email);
     }
+    
     public static  ArrayList<Contacts> createContactList(){
         ArrayList<Contacts> ContactsList = new ArrayList<>();
         Contacts contact;
@@ -343,9 +346,7 @@ public class CRM_View {
         
         return ContactsList;
     }
-    
-    
-    
+ 
     public static Lead createLead(){
         String name;
         print("\nEnter the name of the new Lead: ");
@@ -362,7 +363,7 @@ public class CRM_View {
             name = scan.nextLine();
         }while(name.trim().equals(""));
         
-        return new Accounts(name, createContactList());
+        return new Accounts(name, createContactList(), createType());
     }
     
     public static Accounts createAccount(){
@@ -372,7 +373,16 @@ public class CRM_View {
             name = scan.nextLine();
         }while(name.trim().equals(""));
         
-        return new Accounts(name, createContactList(), true);
+        return new Accounts(name, createContactList(), createType() ,true);
     }
-    
+
+    private static String createType() {
+        String type;
+        print("\nEnter the category this will be in: ");
+        do{
+            type = scan.nextLine();
+        }while(type.trim().equals(""));
+        
+        return type;
+    }  
 }
