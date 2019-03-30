@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,7 +27,8 @@ public class CRMTest {
     Contacts contact;
     ArrayList<Contacts> contactList;
     Lead lead;
-    
+    ArrayList<String> form;
+
     
     public CRMTest() {
     }
@@ -35,18 +37,23 @@ public class CRMTest {
     public void setUp() {
         instance = new CRM("Model Company");
         
+        ArrayList<String> form = new ArrayList<>();
+        form.add("");
+        
         contactList = new ArrayList<>();
         contact = new Contacts("Google manager", "5101119999","manager.google.com");
         contactList.add(contact);
         contact = new Contacts("Google Engineer", "5102229999","engineer.google.com");
         contactList.add(contact);
         account = new Accounts("Google", contactList, true);
+        account.setType("Financial");
         instance.addAccount(account);
 
         contactList = new ArrayList<>();
         contact = new Contacts("Agent", "5100105555","agent.nationwide.com");
         contactList.add(contact);
         account = new Accounts("Nationwide", contactList, true);
+        account.setType("Medical");
         instance.addAccount(account);
 
         contactList = new ArrayList<>();
@@ -55,6 +62,7 @@ public class CRMTest {
         contact = new Contacts("Barista", "6968009000","barista.stone.com");
         contactList.add(contact);
         opportunity = new Accounts("Stone", contactList, false);
+        opportunity.setType("Financial");
         instance.addOpporunity(opportunity);
         
         lead = new Lead("Hitachi");
@@ -119,7 +127,7 @@ public class CRMTest {
     @Test
     public void testUpdateContactAccount() {
         System.out.println("updateContactAccount");
-        
+       // instance.updateContactAccount(0, cName, contact);
         //instance.updateContactAccount(0, "Google Assistnant", instance.getAccount().get(0).);
     }
 
@@ -233,7 +241,7 @@ public class CRMTest {
     @Test
     public void testLeadToOpportunity() {
         System.out.println("leadToOpportunity");
-        instance.leadToOpportunity(0, contactList);
+        instance.leadToOpportunity(0, contactList, form, "Medical"); //added in form, type
         assertEquals(0, instance.getLead().size());
     }
 
