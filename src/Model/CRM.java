@@ -81,14 +81,14 @@ public class CRM {//throws
  
     public void addAccount(Accounts account){
         this.account.add(account);
-        if(account.getType().equals("Finance")){
+        if(account.getType().compareToIgnoreCase("Finance") == 0){
             addToFinance(account);
         }else
             addToMedical(account);
     }
     public void addOpporunity(Accounts opportunity){
         this.opportunity.add(opportunity);
-        if(opportunity.getType().equals("Finance")){
+        if(opportunity.getType().compareToIgnoreCase("Finance") == 0){
             addToFinance(opportunity);
         }else
             addToMedical(opportunity);
