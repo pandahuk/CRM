@@ -17,8 +17,6 @@ public class CRM_View {
         String name,temp,input;
         ArrayList <String> questions;
         Boolean promote;
-        
-        
         do {
             choice = simpleMenu();
             switch(choice) {
@@ -59,13 +57,15 @@ public class CRM_View {
                                 do{
                                     input = scan.nextLine();
                                 }while(input.trim().equals(""));
-                                if(input.toLowerCase().compareTo("n") == 0)
+                                if(input.toLowerCase().compareTo("n") == 0){
                                     print("can not make oppurtunity to account");
                                     promote = false;
                                     break;
+                                }
                             }
                         }
                         if(promote){ 
+                            print("Making Opportunity to account\n");
                             userCRM.opportunityToAccount(pos);
                         }
                         break;
@@ -213,8 +213,8 @@ public class CRM_View {
     
     public static ArrayList<String> createFourm(){
         ArrayList<String> questions = new ArrayList<>();
-        print("enter requirements to make this oppurtunity to become an account, one at a time.\n"
-                + "enter Q or quit to stop");
+        print("Enter requirements to make this oppurtunity to become an account, one at a time.\n"
+                + "enter Q or quit to stop\n");
         int i = 1;
         String input;
         do{
@@ -224,6 +224,8 @@ public class CRM_View {
             }while(input.trim().equals(""));
             if(input.compareToIgnoreCase("q") == 0 || input.compareToIgnoreCase("quit") == 0)
                 break;
+            questions.add(input);
+            i++;
         }while(true);
         
         return questions;
@@ -250,7 +252,7 @@ public class CRM_View {
                 "6.View all accounts\n"+
                 "7.View minimal CRM info\n"+
                 "8.View all CRM info\n"+
-                "9.View by Catigory"+
+                "9.View by Catigory\n"+
                 "10.quit\n");
         do{
             decision = scan.nextInt();
@@ -361,7 +363,7 @@ public class CRM_View {
             name = scan.nextLine();
         }while(name.trim().equals(""));
         
-        return new Accounts(name, createContactList(), createType());
+        return new Accounts(name, createContactList(), createFourm() , createType());
     }
     
     public static Accounts createAccount(){
@@ -374,9 +376,10 @@ public class CRM_View {
         return new Accounts(name, createContactList(), createType() ,true);
     }
 
-    private static String createType() {
+    public static String createType() {
         String type;
-        print("\nEnter the category this will be in: ");
+        print("\nEnter the category this will be in:\n"
+                + "Currently only have Medical and Finance");
         do{
             type = scan.nextLine();
         }while(type.trim().equals(""));
