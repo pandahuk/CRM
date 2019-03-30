@@ -32,11 +32,19 @@ public class Accounts {
         this.Account = false;
     }
     
-    public Accounts(String n,ArrayList<Contacts> al,String type , boolean a){
+    public Accounts(String n, ArrayList<Contacts> al,String type , boolean a){
         this.Type = type;
         this.accountName = n;
         this.contractList = al;
         this.Account = a;
+    }
+    
+    public Accounts(String n, ArrayList<Contacts> al, ArrayList<String> form, String type){
+        this.Form = form;
+        this.Type = type;
+        this.accountName = n;
+        this.contractList = al;
+        this.Account = false;
     }
     
     public Accounts(Lead l, ArrayList<Contacts> al){

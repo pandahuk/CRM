@@ -37,7 +37,7 @@ public class CRM {//throws
         this.account = new ArrayList<>();
         this.opportunity = new ArrayList<>();
         this.leads = new ArrayList<>();
-        
+        this.categories = new ArrayList<>();
         generalCategory = new ArrayList<ArrayList<Accounts>>();
         
          //Create categories and category lists, should be able to accept both opp and acc
@@ -262,7 +262,7 @@ public class CRM {//throws
     public String printCategories(){
         String categoryStr = "Categories: \n";
         for(int i = 0 ; i < categories.size() ; i++){
-            categoryStr += (i + ". " + categories.get(i));
+            categoryStr += (i + ". " + categories.get(i)+ "\n");
         }
         return categoryStr;
     }
