@@ -11,9 +11,7 @@ public class CRM_View {
     
     //testing new clone
     public static void main(String[] args) {
-        print("hello");
         userCompanyName = CRMname();
-        print("hello");
         userCRM = new CRM(userCompanyName);
         int choice, pos = 0, secondChoice;
         String name,temp,input;
