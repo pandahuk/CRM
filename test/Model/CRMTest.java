@@ -27,47 +27,54 @@ public class CRMTest {
     Contacts contact;
     ArrayList<Contacts> contactList;
     Lead lead;
+    
     ArrayList<String> form;
+    ArrayList<Accounts> financeList;
+    ArrayList<Accounts> medicalList;
 
-    
-    public CRMTest() {
-    }
-    
     @Before
     public void setUp() {
         instance = new CRM("Model Company");
         
-        ArrayList<String> form = new ArrayList<>();
+        form = new ArrayList<>();
         form.add("");
+        
+        financeList = new ArrayList<>();
+        medicalList = new ArrayList<>();
+        
+        lead = new Lead("Hitachi");
+        instance.addLead(lead);
         
         contactList = new ArrayList<>();
         contact = new Contacts("Google manager", "5101119999","manager.google.com");
         contactList.add(contact);
         contact = new Contacts("Google Engineer", "5102229999","engineer.google.com");
         contactList.add(contact);
-        account = new Accounts("Google", contactList, true);
-        account.setType("Financial");
+        account = new Accounts("Google", contactList, "Financial", true);
         instance.addAccount(account);
+        
+        financeList.add(account);
 
         contactList = new ArrayList<>();
         contact = new Contacts("Agent", "5100105555","agent.nationwide.com");
         contactList.add(contact);
-        account = new Accounts("Nationwide", contactList, true);
-        account.setType("Medical");
+        account = new Accounts("Nationwide", contactList, "Medical", true);
         instance.addAccount(account);
+        medicalList.add(account);
+
 
         contactList = new ArrayList<>();
         contact = new Contacts("Manager", "6965009000","manager.stone.com");
         contactList.add(contact);
         contact = new Contacts("Barista", "6968009000","barista.stone.com");
         contactList.add(contact);
-        opportunity = new Accounts("Stone", contactList, false);
-        opportunity.setType("Financial");
+        opportunity = new Accounts("Stone", contactList, "Financial", false);
         instance.addOpporunity(opportunity);
-        
-        lead = new Lead("Hitachi");
-        instance.addLead(lead);
+        financeList.add(account);
 
+        //System.out.println(instance.printCategories());
+        //System.out.println(instance.printFinance());
+        //System.out.println(instance.printMedical());
     }
     
     @After
@@ -80,7 +87,9 @@ public class CRMTest {
     @Test
     public void testAddAccount() {
         System.out.println("addAccount");
-        account = new Accounts("Netflix");
+        contact = new Contacts("Videographer", "6079594992","Video.netflix.com");
+        contactList.add(contact);
+        account = new Accounts("Netflix", contactList, "Financial", true);
         instance.addAccount(account);
         
         assertEquals(3, instance.getAccount().size());
@@ -92,8 +101,12 @@ public class CRMTest {
     @Test
     public void testAddOpporunity() {
         System.out.println("addOpporunity");
-        opportunity = new Accounts("Yalla");
+        
+        contact = new Contacts("Cashier", "5859990000","cashier.yalla.com");
+        contactList.add(contact);
+        opportunity = new Accounts("Yalla", contactList, "Medical", false);
         instance.addOpporunity(opportunity);
+        
         assertEquals(2, instance.getAccount().size());
 
     }
@@ -354,6 +367,58 @@ public class CRMTest {
 "";
         String result = instance.toString();
         assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testAddToFinance(){
+        assertEquals(2, financeList.size());
+    }
+    
+    @Test
+    public void testAddToMedical(){
+        assertEquals(1, medicalList.size());
+    }
+    
+    
+    @Test
+    public void testRemoveFinance(){
+        //instance.removeFinance(0);
+        //assertEquals(2, financeList.size());
+    }
+    
+    @Test
+    public void testRemoveMedical(){
+        //instance.removeMedical(0);
+        //assertEquals(1, medicalList.size());
+    }
+    
+    @Test
+    public void testGetOppForm(){
+        
+    }
+    
+    @Test
+    public void testPrintCategories(){
+        //System.out.println(instance.printCategories());
+    }
+    
+    @Test
+    public void testPrintFinance(){
+        //System.out.println(instance.printFinance());
+        String expResult = "Finance: \n";
+        assertEquals(expResult, instance.printFinance());
+        
+    }
+    
+    @Test
+    public void testPrintMedical(){
+                System.out.println(instance.printMedical());
+
+        String expResult = "Medical: \n" +
+"0. Google\n" +
+"1. Nationwide\n" +
+"2. Stone\n";
+        assertEquals(expResult, instance.printMedical());
     }
     
 }
