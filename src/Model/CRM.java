@@ -23,7 +23,7 @@ public class CRM {//throws
 
     //Categories and general category lists
     private List<String> categories;
-    private ArrayList<ArrayList<Accounts>> generalCategory;
+    //private ArrayList<ArrayList<Accounts>> generalCategory;
     private ArrayList<Accounts> financeList;
     private ArrayList<Accounts> medicalList;
    
@@ -37,12 +37,10 @@ public class CRM {//throws
         this.account = new ArrayList<>();
         this.opportunity = new ArrayList<>();
         this.leads = new ArrayList<>();
-        
-        generalCategory = new ArrayList<ArrayList<Accounts>>();
-        
+           
          //Create categories and category lists, should be able to accept both opp and acc
-        categories.add("Medical");
-        categories.add("Finance");
+        //categories.add("Medical");
+        //categories.add("Finance");
         
         financeList = new ArrayList<>();
         medicalList = new ArrayList<>();
@@ -115,10 +113,7 @@ public class CRM {//throws
     public void removeMedical(int pos){
         medicalList.remove(pos);
     }
-    
-    //account index ( assume it's the corrrect index passed in) and account name
-    // you will need to test to see if the account pos is in range before using it!!!
-    // sorry about this
+
     public void addContactAccount(int accountPos, Contacts contact){
         if(accountPos < account.size())
             account.get(accountPos).addContact(contact);
@@ -189,8 +184,6 @@ public class CRM {//throws
             System.out.println("Index out of range");
     }
     
-    // alter to accept a int for the pos of the lead. view does not have access to
-    // CRM class leads. check if its in range if not print error msg and return.
     public void leadToOpportunity(int leadPos, ArrayList<Contacts> contact , ArrayList<String> form, String type){
         if(leadPos < leads.size()){
             opportunity.add(new Accounts(leads.get(leadPos), contact, form, type));
@@ -200,12 +193,9 @@ public class CRM {//throws
     }
     
     public ArrayList<String> getOppForm(int pos){
-        //position for opportunity, access and use getForm from accounts,return form list 
         return opportunity.get(pos).getForm();
     }
     
-    // alter to accept a int for the pos of the opp. view does not have access to
-    // CRM class opps. check if its in range if not print error msg and return.
     public void opportunityToAccount(int opportunityPos){
         if(opportunityPos < opportunity.size()){
             opportunity.get(opportunityPos).toAccount();
@@ -223,18 +213,10 @@ public class CRM {//throws
             System.out.println("Index out of range.");
     }
     
-    
-    //print for each of the 3 lists
-        //print out index too
-    
     public String printAccount(){
         String accountStr = "Accounts:\n";
-        for(int i = 0; i < account.size(); i++){
-            
+        for(int i = 0; i < account.size(); i++){     
             accountStr += (i + ". " + account.get(i));
-            
-            //account.get(i).toString(); no need to call too string.
-            //just out put the object itself
         }
         return accountStr;
     }
@@ -243,8 +225,6 @@ public class CRM {//throws
         String opportunityStr = "Opportunities: \n";
         for(int i = 0; i < opportunity.size(); i++){
             opportunityStr += (i + ". " + opportunity.get(i));
-            //opportunity.get(i).toString(); no need to call too string.
-            //just out put the object itself
         }
         return opportunityStr;
     }
@@ -253,8 +233,6 @@ public class CRM {//throws
         String leadStr = "Leads: \n";
         for(int i = 0; i < leads.size(); i++){
             leadStr += (i + ". " + leads.get(i).getCompanyName() + "\n");
-            //System.out.print(i + ". "+ leads.get(i));
-            //maybe Lead class needs a toString() function "yes it should"
         }
         return leadStr;
     }
@@ -266,14 +244,6 @@ public class CRM {//throws
         }
         return categoryStr;
     }
-    
-    public String printGeneralCategory(){
-        String genStr = "";
-        
-        
-        return genStr;
-    }
-    
     
     public String printFinance(){
         String financeStr = "Finance: \n";
@@ -290,22 +260,11 @@ public class CRM {//throws
         }
         return medicalStr;
     }
-    
-    //if you alter the 3 prints to return strings instead of printing then you
-    //can just call them in allInfo and return the string that each of them 
-    //create together.
-    
-    //i might also need you to add 2 more methods.... simillar to the 2 above
-    //just instead of using tostring call the all info so i can view the 
-    //contact info in view.
-    
-    //I believe these are the two methods needed, let me know if it isn't.
+
     public String printAccountContacts(){
         String contactStr = "Accounts: \n";
         for(int i = 0; i < account.size(); i++){
             contactStr += (i + ". " + account.get(i).allinfo() + "\n");
-            //System.out.print(i + ". "+ leads.get(i));
-            //maybe Lead class needs a toString() function "yes it should"
         }
         return contactStr;
     }
@@ -313,8 +272,6 @@ public class CRM {//throws
         String opportunityStr = "Opportunities: \n";
         for(int i = 0; i < opportunity.size(); i++){
             opportunityStr += (i + ". " + opportunity.get(i).allinfo() + "\n");
-            //System.out.print(i + ". "+ leads.get(i));
-            //maybe Lead class needs a toString() function "yes it should"
         }
         return opportunityStr;
     }
@@ -323,15 +280,8 @@ public class CRM {//throws
         return (printAccountContacts() + printOpportunityContacts() + printLeads());
     }
     
-    //loop though the 3 list and create a string that you can return. 
-    //str += i + ". " + account.get(i); example.
-    // this toString will print out the basic info
-    // for all the acocunts/opps/tostrings
     @Override
     public String toString(){        
         return (printAccount() + printOpportunity() + printLeads());
-        //should this be the Account object toString() or the CRM toString() for CRM company name? (current class)
-             //This should be the CRM company name ( current class) since accounts should have their own company name for each individual objects in their List.
-        
     }
 }
