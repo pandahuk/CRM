@@ -6,6 +6,8 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 /**
  *
  * @author Hung
@@ -17,6 +19,8 @@ public class Accounts {
     private boolean Account; // true == account; false == oppotunity
     private String Type;
     private ArrayList<String> Form;
+    private Calendar dates = Calendar.getInstance();
+    private int bought = 0;
     
     // contrutors
     public Accounts(String n){
@@ -92,6 +96,14 @@ public class Accounts {
         return Type;
     }
     
+    public Calendar getDates() {
+        return this.dates;
+    }
+    
+    public int getBought(){
+        return this.bought;
+    }
+    
     //setter
     public void setType(String t){
         Type =t;
@@ -163,6 +175,11 @@ public class Accounts {
     
     public void toAccount(){
         this.Account = true;
+        this.dates = Calendar.getInstance();
+    }
+    
+    public void increaseBought(int more){
+        this.bought += more;
     }
     
     //call contacts tostring no need to get each individual element
