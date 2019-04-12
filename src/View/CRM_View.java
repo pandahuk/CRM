@@ -209,7 +209,7 @@ public class CRM_View {
                 print(userCRM.listAccountDates());
                 break;
             case 12: // accounts qty
-                print(userCRM.listAccountQtyPurchesed());
+                print(userCRM.listAccountQtyPurchased());
                 break;
                 
             }
@@ -273,9 +273,9 @@ public class CRM_View {
                 "7.View minimal CRM info\n"+
                 "8.View all CRM info\n"+
                 "9.View by Catigory\n"+
-                "10.View all oppurtunities by date"+
-                "11.View all accounts by date"+
-                "12.View all accounts quantity purchesed"+
+                "10.View all oppurtunities by date\n"+
+                "11.View all accounts by date\n"+
+                "12.View all accounts quantity purchesed\n"+
                 "13.quit\n");
         do{
             decision = scan.nextInt();
@@ -319,7 +319,7 @@ public class CRM_View {
                 "3.Update a contact number\n"+
                 "4.Update a contact email\n"+
                 "5.add new contact\n"+
-                "6.increase product puchesed"+
+                "6.increase product puchesed\n"+
                 "7.return to main menu\n");
         do{
             decision = scan.nextInt();
@@ -409,7 +409,7 @@ public class CRM_View {
     public static String createType() {
         String type;
         print("\nEnter the category this will be in:\n"
-                + "Currently only have Medical and Finance");
+                + "Currently only have Medical and Finance: ");
         do{
             type = scan.nextLine();
         }while(type.trim().equals(""));
