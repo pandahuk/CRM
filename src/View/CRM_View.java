@@ -176,6 +176,14 @@ public class CRM_View {
                     case 5:
                         pos = getPos();
                         userCRM.addContactAccount(pos,createContact());
+                        break;
+                    case 6:
+                        pos = getPos();
+                        print("How much product was purchesed by account " + pos + " : ");
+                        do{
+                            choice = scan.nextInt();
+                        }while(choice < 1);     
+                        //userCRM.updateQty(pos,choice);
                 }
 		break;
             case 7: // display simple crm info
@@ -194,8 +202,19 @@ public class CRM_View {
                 else
                     print(userCRM.printFinance());   
                 break;
+            case 10: //opps date
+                print(userCRM.listOpportunityDates());
+                break;
+            case 11: // accounts date
+                print(userCRM.listAccountDates());
+                break;
+            case 12: // accounts qty
+                print(userCRM.listAccountQtyPurchesed());
+                break;
+                
             }
-	}while(choice != 10 );
+            
+	}while(choice != 13 );
         print("GoodBye\n");
     }
     //print helper
@@ -254,10 +273,13 @@ public class CRM_View {
                 "7.View minimal CRM info\n"+
                 "8.View all CRM info\n"+
                 "9.View by Catigory\n"+
-                "10.quit\n");
+                "10.View all oppurtunities by date"+
+                "11.View all accounts by date"+
+                "12.View all accounts quantity purchesed"+
+                "13.quit\n");
         do{
             decision = scan.nextInt();
-        }while(decision < 1 || decision > 10);
+        }while(decision < 1 || decision > 13);
         return decision;
     }
     
@@ -297,10 +319,11 @@ public class CRM_View {
                 "3.Update a contact number\n"+
                 "4.Update a contact email\n"+
                 "5.add new contact\n"+
-                "6.return to main menu\n");
+                "6.increase product puchesed"+
+                "7.return to main menu\n");
         do{
             decision = scan.nextInt();
-        }while(decision < 1 || decision > 7);
+        }while(decision < 1 || decision > 8);
         return decision;
     }
     
