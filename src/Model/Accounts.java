@@ -19,7 +19,7 @@ public class Accounts {
     private boolean Account; // true == account; false == oppotunity
     private String Type;
     private ArrayList<String> Form;
-    private Calendar dates = Calendar.getInstance();
+    private Calendar dates = new GregorianCalendar();
     private int bought = 0;
     
     // contrutors
@@ -96,8 +96,15 @@ public class Accounts {
         return Type;
     }
     
-    public Calendar getDates() {
-        return this.dates;
+    public String getDates() {
+        String date;
+        int month = dates.get(Calendar.MONTH);
+        month +=1;
+        
+        date = month + "/" + dates.get(Calendar.DAY_OF_MONTH) + "/" + dates.get(Calendar.YEAR) + "\n" +
+                dates.get(Calendar.HOUR_OF_DAY) + ":" + dates.get(Calendar.MINUTE) + ":" + dates.get(Calendar.SECOND);
+        
+        return date;
     }
     
     public int getBought(){
