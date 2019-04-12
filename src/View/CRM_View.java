@@ -10,7 +10,6 @@ public class CRM_View {
     private static final Scanner scan = new Scanner(System.in);
     
     //testing new clone
-    private static int x;
     public static void main(String[] args) {
         userCompanyName = CRMname();
         userCRM = new CRM(userCompanyName);
@@ -18,20 +17,20 @@ public class CRM_View {
         String name,temp,input;
         ArrayList <String> questions;
         Boolean promote;
-        
+        //switch case for menus
         do {
             choice = simpleMenu();
             switch(choice) {
-            case 1:
+            case 1: //make lead
                 userCRM.addLead(createLead());
                 break;
-            case 2:
+            case 2: //make opp
 		userCRM.addOpporunity(createOpp());
 		break;
-            case 3:
+            case 3: // make account
 		userCRM.addAccount(createAccount());
 		break;
-            case 4:
+            case 4: //print lead followed by lead menu
                 print(userCRM.printLeads());
                 
                 if(leadMenu()){
@@ -39,20 +38,19 @@ public class CRM_View {
                     do{
                         pos = scan.nextInt();
                     }while(pos < 0);
-                    userCRM.leadToOpportunity(pos, createContactList());
-                    //userCRM.leadToOpportunity(pos, createContactList(), createForm());
+                    userCRM.leadToOpportunity(pos, createContactList(), createFourm(), createType());
                 }
 		break;
                 
-            case 5:
+            case 5:// print opp followed by opp menu
                 print(userCRM.printOpportunityContacts());
                 secondChoice = oppMenu();
                 
                 switch(secondChoice){
-                    case 1:
+                    case 1: //opp to account
                         pos = getPos();
                         promote = true;
-                        //questions =  userCRM.getOppFourm(pos)
+                        questions =  userCRM.getOppForm(pos);
                         if(!questions.isEmpty()){
                             print("Answer Y/N if you completed the following task\n");
                             for(String i : questions){
@@ -60,17 +58,19 @@ public class CRM_View {
                                 do{
                                     input = scan.nextLine();
                                 }while(input.trim().equals(""));
-                                if(input.toLowerCase().compareTo("n") == 0)
+                                if(input.toLowerCase().compareTo("n") == 0){
                                     print("can not make oppurtunity to account");
                                     promote = false;
                                     break;
+                                }
                             }
                         }
                         if(promote){ 
+                            print("Making Opportunity to account\n");
                             userCRM.opportunityToAccount(pos);
                         }
                         break;
-                    case 2:
+                    case 2: //updating contact
                         pos = getPos();
                         print("Enter current contact name: ");
                         do{
@@ -122,11 +122,11 @@ public class CRM_View {
                         userCRM.addContactOpportunity(pos,createContact());
                 }
 		break;
-            case 6:
+            case 6: //print account followed by account menu
                 print(userCRM.printAccountContacts());
                 secondChoice = accountMenu();
                 switch(secondChoice){
-                    case 1:
+                    case 1: //update contacts
                         pos = getPos();
                         print("Enter current contact name: ");
                         do{
@@ -178,27 +178,31 @@ public class CRM_View {
                         userCRM.addContactAccount(pos,createContact());
                 }
 		break;
-            case 7:
+            case 7: // display simple crm info
                 print(userCRM + "");
 		break;
-            case 8:
+            case 8: //display detailed information
 		print(userCRM.allInfo());
 		break;
-            case 9:
-                //userCRM.printCatigories();
+            case 9: // displaying categories 
+                
+                print(userCRM.printCategories());
                 print("select a Catigory");
                 pos = getPos();
-                //userCRM.PrintInfoCatigory(pos);
+                if(pos == 0)
+                    print(userCRM.printMedical());
+                else
+                    print(userCRM.printFinance());   
                 break;
             }
 	}while(choice != 10 );
         print("GoodBye\n");
     }
-    
+    //print helper
     public static void print(String outPut){
         System.out.print(outPut);
     }
-        
+    // helper to get pos from user
     public static int getPos(){
         int pos;
         print("select an account/oppurtunity: ");
@@ -207,11 +211,11 @@ public class CRM_View {
         }while(pos < 0);
         return pos;
     }
-    
+    //getting form from user
     public static ArrayList<String> createFourm(){
         ArrayList<String> questions = new ArrayList<>();
-        print("enter requirements to make this oppurtunity to become an account, one at a time.\n"
-                + "enter Q or quit to stop");
+        print("Enter requirements to make this oppurtunity to become an account, one at a time.\n"
+                + "enter Q or quit to stop\n");
         int i = 1;
         String input;
         do{
@@ -221,11 +225,13 @@ public class CRM_View {
             }while(input.trim().equals(""));
             if(input.compareToIgnoreCase("q") == 0 || input.compareToIgnoreCase("quit") == 0)
                 break;
+            questions.add(input);
+            i++;
         }while(true);
         
         return questions;
     }
-    
+    //getting name from user
     public static String CRMname(){
         String name;
         print("Enter your Buissness name for the CRM you wish to create: ");
@@ -235,7 +241,7 @@ public class CRM_View {
         
         return name;
     }
-    
+    //displaying simple menu and retuns result of use
     public static int simpleMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
@@ -247,13 +253,15 @@ public class CRM_View {
                 "6.View all accounts\n"+
                 "7.View minimal CRM info\n"+
                 "8.View all CRM info\n"+
-                "9.View by Catigory"+
+                "9.View by Catigory\n"+
                 "10.quit\n");
         do{
             decision = scan.nextInt();
         }while(decision < 1 || decision > 10);
         return decision;
     }
+    
+    //displays lead menu and retuens user input
     public static boolean leadMenu(){
         String input;
         print("\nWould you like to change a lead to an opportunity? Y/N\n");
@@ -263,6 +271,8 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n")));
         return input.equalsIgnoreCase("y");
     }
+    
+    //displays opp menu and retuens user input
     public static int oppMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
@@ -278,7 +288,7 @@ public class CRM_View {
         }while(decision < 1 || decision > 7);
         return decision;
     }
-    
+    //displays account menu and retuens user input
     public static int accountMenu(){
         int decision;
         print("\n\n\nplease enter the number of the option you would like to prform\n"+
@@ -294,7 +304,7 @@ public class CRM_View {
         return decision;
     }
     
-    
+    ////displays contact menu and retuens user input
     public static boolean contactQ(){
         String input;
         print("\nwould you like to add contacts? Y/N\n");
@@ -304,6 +314,7 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n"));
         return input.equalsIgnoreCase("y");
     }
+    //collects contact info till user stops
     public static boolean MoreContactQ(){
         String input;
         print("\nwould you like to add more contacts? Y/N\n");
@@ -313,6 +324,7 @@ public class CRM_View {
                 && !input.equalsIgnoreCase("n"));
         return input.equalsIgnoreCase("y");
     }
+    //will promt for contact info
     public static  Contacts createContact(){
         String name;
         String phoneNum;
@@ -328,6 +340,7 @@ public class CRM_View {
         
         return new Contacts(name,phoneNum,email);
     }
+    // will call the create contact to collect contact infos
     public static  ArrayList<Contacts> createContactList(){
         ArrayList<Contacts> ContactsList = new ArrayList<>();
         Contacts contact;
@@ -340,9 +353,7 @@ public class CRM_View {
         
         return ContactsList;
     }
-    
-    
-    
+    //creates lead
     public static Lead createLead(){
         String name;
         print("\nEnter the name of the new Lead: ");
@@ -351,7 +362,7 @@ public class CRM_View {
         }while(name.trim().equals(""));
         return new Lead(name); 
     }
-    
+    //create opp
     public static Accounts createOpp(){
         String name;
         print("\nEnter the name of the new Opportunity : ");
@@ -359,9 +370,9 @@ public class CRM_View {
             name = scan.nextLine();
         }while(name.trim().equals(""));
         
-        return new Accounts(name, createContactList());
+        return new Accounts(name, createContactList(), createFourm() , createType());
     }
-    
+    // will create account
     public static Accounts createAccount(){
         String name;
         print("\nEnter the name of the new Account: ");
@@ -369,7 +380,17 @@ public class CRM_View {
             name = scan.nextLine();
         }while(name.trim().equals(""));
         
-        return new Accounts(name, createContactList(), true);
+        return new Accounts(name, createContactList(), createType() ,true);
     }
-    
+    //getting user input for the type of account
+    public static String createType() {
+        String type;
+        print("\nEnter the category this will be in:\n"
+                + "Currently only have Medical and Finance");
+        do{
+            type = scan.nextLine();
+        }while(type.trim().equals(""));
+        
+        return type;
+    }  
 }
