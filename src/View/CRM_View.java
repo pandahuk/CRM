@@ -183,7 +183,7 @@ public class CRM_View {
                         do{
                             choice = scan.nextInt();
                         }while(choice < 1);     
-                        //userCRM.updateQty(pos,choice);
+                        userCRM.updateQty(pos,choice);
                 }
 		break;
             case 7: // display simple crm info
@@ -202,7 +202,7 @@ public class CRM_View {
                 else
                     print(userCRM.printFinance());   
                 break;
-            case 10: //opps date
+            case 10:
                 print(userCRM.listOpportunityDates());
                 break;
             case 11: // accounts date
