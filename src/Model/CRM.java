@@ -321,7 +321,7 @@ public class CRM {//throws
         StringBuilder qty = new StringBuilder();
         qty.append("Account quantity purchased: \n");
                 
-        for(int i = 0 ; i < opportunity.size() ; i++){
+        for(int i = 0 ; i < account.size() ; i++){
             qty.append(i);
             qty.append(". ");
             qty.append(account.get(i).toString());
