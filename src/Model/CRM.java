@@ -27,9 +27,7 @@ public class CRM {//throws
     private ArrayList<Accounts> financeList;
     private ArrayList<Accounts> medicalList;
    
-            
     //hard coded type for medical/financial
-    
     
     public CRM(String name) {
         //initialize
@@ -37,12 +35,8 @@ public class CRM {//throws
         this.account = new ArrayList<>();
         this.opportunity = new ArrayList<>();
         this.leads = new ArrayList<>();
-        this.categories = new ArrayList<>();
-        //generalCategory = new ArrayList<ArrayList<Accounts>>();
-        
-         //Create categories and category lists, should be able to accept both opp and acc
-        categories.add("Medical");
-        categories.add("Finance");
+           
+        //Create categories and category lists, should be able to accept both opp and acc
         
         financeList = new ArrayList<>();
         medicalList = new ArrayList<>();
@@ -287,4 +281,64 @@ public class CRM {//throws
     public String toString(){        
         return (printAccount() + printOpportunity() + printLeads());
     }
+    
+    //Paper company
+    public String listOpportunityDates(){
+        StringBuilder date = new StringBuilder();
+        date.append("Dates of Opportunities creation: \n");
+                
+        for(int i = 0 ; i < opportunity.size() ; i++){
+            date.append(i);
+            date.append(". ");
+            date.append(opportunity.get(i).toString());
+            date.append("\t");
+            date.append(opportunity.get(i).getDates().toString());
+            date.append("\n");
+
+        }
+        
+        return date.toString();
+    }
+    
+    public String listAccountDates(){
+        StringBuilder date = new StringBuilder();
+        date.append("Dates of Accounts creation: \n");
+                
+        for(int i = 0 ; i < account.size() ; i++){
+            date.append(i);
+            date.append(". ");
+            date.append(account.get(i).toString());
+            date.append("\t");
+            date.append(account.get(i).getDates().toString());
+            date.append("\n");
+
+        }
+        
+        return date.toString();
+    }
+    
+    public String listAccountQtyPurchased(){
+        StringBuilder qty = new StringBuilder();
+        qty.append("Account quantity purchased: \n");
+                
+        for(int i = 0 ; i < opportunity.size() ; i++){
+            qty.append(i);
+            qty.append(". ");
+            qty.append(account.get(i).toString());
+            qty.append("\t");
+            qty.append(account.get(i).getBought());
+            qty.append("\n");
+        }
+        
+        return qty.toString();
+    }
+    
+    public void updateQty(int pos, int amt){
+        account.get(pos).increaseBought(amt);
+    }
+    
+    
+    
+    
+    
 }
