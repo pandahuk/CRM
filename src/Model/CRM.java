@@ -292,7 +292,7 @@ public class CRM {//throws
             date.append(". ");
             date.append(opportunity.get(i).toString());
             date.append("\t");
-            date.append(opportunity.get(i).getDates().toString());
+            date.append((opportunity.get(i).getDates()));
             date.append("\n");
 
         }
@@ -309,7 +309,7 @@ public class CRM {//throws
             date.append(". ");
             date.append(account.get(i).toString());
             date.append("\t");
-            date.append(account.get(i).getDates().toString());
+            date.append(account.get(i).getDates());
             date.append("\n");
 
         }
@@ -336,9 +336,5 @@ public class CRM {//throws
     public void updateQty(int pos, int amt){
         account.get(pos).increaseBought(amt);
     }
-    
-    
-    
-    
-    
+
 }
