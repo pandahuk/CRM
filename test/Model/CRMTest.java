@@ -421,4 +421,11 @@ public class CRMTest {
         assertEquals(expResult, instance.printMedical());
     }
     
+    //test dates and purchases
+    @Test
+    public void testUpdateQty(){
+        instance.updateQty(0, 100);
+        assertEquals(100, instance.getAccount().get(0).getBought());
+    }
+
 }
